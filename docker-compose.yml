@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  meu_keycloak:
+    image: quay.io/keycloak/keycloak:24.0.2
+    restart: always
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    command:
+      - start-dev
+    volumes:
+      - keycloak_data:/opt/jboss/keycloak/standalone/data
+      - keycloak_logs:/opt/jboss/keycloak/standalone/log
+
+volumes:
+  keycloak_data:
+  keycloak_logs:
