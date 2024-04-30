@@ -3,6 +3,7 @@ package api.usuarios.exception.handler.auth;
 import api.usuarios.exception.AuthException;
 import api.usuarios.exception.ErrorDetails;
 import api.usuarios.exception.RefreshException;
+import api.usuarios.utils.IpUtils;
 import api.usuarios.utils.RandomUtils;
 import api.usuarios.utils.TimeUtils;
 import org.springframework.http.HttpStatusCode;
@@ -16,14 +17,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ErrorHandlerAuth extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AuthException.class)
-    public ResponseEntity<ErrorDetails> errorValidatingToken() {
-        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), String.format("%s", "Error when validating token"), RandomUtils.generateCode());
+    public ResponseEntity<ErrorDetails> errorValidatingToken(AuthException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "externalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
     }
 
     @ExceptionHandler(RefreshException.class)
-    public ResponseEntity<ErrorDetails> errorValidatingRefreshToken() {
-        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), String.format("%s", "Error Refresh token"), RandomUtils.generateCode());
+    public ResponseEntity<ErrorDetails> errorValidatingRefreshToken(RefreshException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "externalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
     }
 }

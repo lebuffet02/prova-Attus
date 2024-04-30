@@ -29,8 +29,8 @@ public class AuthServiceImpl implements AuthService {
     public AuthKeycloakDTO tokenService(AuthKeycloak authKeycloak) {
         try {
             return mapper.builderToAuthKeycloakDTO(getChamadaFeign(authKeycloak));
-        } catch (RefreshException ex) {
-            throw new AuthException();
+        } catch (RuntimeException ex) {
+            throw new AuthException(String.format("%s", "Error when validating token"));
         }
     }
 
@@ -38,8 +38,8 @@ public class AuthServiceImpl implements AuthService {
     public AuthKeycloakDTO refreshTokenService(RefreshKeycloak refresh) {
         try {
             return mapper.builderToAuthKeycloakDTO(getChamadaFeign(refresh));
-        } catch (RefreshException ex) {
-            throw new RefreshException();
+        } catch (RuntimeException ex) {
+            throw new RefreshException(String.format("%s", "Error Refresh token"));
         }
     }
 

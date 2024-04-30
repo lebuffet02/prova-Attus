@@ -10,7 +10,7 @@ public class RandomUtils {
     public static String generateCode() {
         return new Random().ints(NUMERIC, LETTER + 1)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(15)
+                .limit(30)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
     }
 }
