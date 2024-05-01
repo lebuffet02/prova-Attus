@@ -1,6 +1,7 @@
-package api.usuarios.exception.handler.auth;
+package api.usuarios.exception.handler;
 
 import api.usuarios.exception.AuthException;
+import api.usuarios.exception.EmailException;
 import api.usuarios.exception.ErrorDetails;
 import api.usuarios.exception.RefreshException;
 import api.usuarios.utils.IpUtils;
@@ -24,6 +25,12 @@ public class ErrorHandlerAuth extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RefreshException.class)
     public ResponseEntity<ErrorDetails> errorValidatingRefreshToken(RefreshException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "externalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
+    }
+
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<ErrorDetails> errorValidatingAwsEmailSes(EmailException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "externalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
     }

@@ -26,7 +26,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a.requestMatchers("/token", "/refresh-token").permitAll()
-                        .requestMatchers("/api/**").hasRole("USER")
+                        .requestMatchers("/api/users").hasRole("USER")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(
                 oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(new JWTConverter()))).build();
