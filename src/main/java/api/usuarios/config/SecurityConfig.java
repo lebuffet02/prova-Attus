@@ -4,6 +4,8 @@ import api.usuarios.security.JWTConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,6 +29,7 @@ public class SecurityConfig implements WebMvcConfigurer {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a.requestMatchers("/token", "/refresh-token").permitAll()
                         .requestMatchers("/api/users").hasRole("USER")
+                        .requestMatchers("/api/email").hasRole("USER")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(
                 oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(new JWTConverter()))).build();
@@ -37,6 +40,11 @@ public class SecurityConfig implements WebMvcConfigurer {
         return (web -> web.ignoring().requestMatchers(
                 "/v3/api-docs/**",
                 "/swagger-ui/**"));
+    }
+
+    @Bean
+    public JavaMailSender javaMailSender() {
+        return new JavaMailSenderImpl();
     }
 
     @Override

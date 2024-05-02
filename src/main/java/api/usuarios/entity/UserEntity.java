@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "USUARIOS")
 @Data
 @NoArgsConstructor
-public class UsuarioEntity implements Serializable {
+public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -32,7 +32,7 @@ public class UsuarioEntity implements Serializable {
     @DateTimeFormat(pattern = "dd-MM-yyyy", iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime dataNascimento;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idEndereco", referencedColumnName = "id")
-    private EnderecoEntity enderecos;
+    private AddressEntity enderecos;
 }

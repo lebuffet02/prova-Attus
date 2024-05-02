@@ -6,13 +6,6 @@ networks:
 volumes:
   prova-usuarios-keycloak-data:
   prova-usuarios-keycloak_logs:
-  prova-usuarios-sonarqube_conf:
-  prova-usuarios-sonarqube_data:
-  prova-usuarios-sonarqube_extensions:
-  prova-usuarios-sonarqube_logs:
-  prova-usuarios-sonarqube_temp:
-  prova-usuarios-sonar_db:
-  prova-usuarios-sonar_db_data:
 
 
 services:
@@ -31,24 +24,6 @@ services:
     volumes:
       - prova-usuarios-keycloak-data:/opt/jboss/keycloak/standalone/data
       - prova-usuarios-keycloak_logs:/opt/jboss/keycloak/standalone/log
-
-
-#  sonarqube:
-#    image: sonarqube:lts-community
-##    depends_on:
-##      - sonar_db
-#    environment:
-#      SONAR_JDBC_URL: jdbc:postgresql://sonar_db:5432/sonar
-#      SONAR_JDBC_USERNAME: sonar
-#      SONAR_JDBC_PASSWORD: sonar
-#    ports:
-#      - 9000:9000
-#    volumes:
-#      - prova-usuarios-sonarqube_conf:/opt/sonarqube/conf
-#      - prova-usuarios-sonarqube_data:/opt/sonarqube/data
-#      - prova-usuarios-sonarqube_extensions:/opt/sonarqube/extensions
-#      - prova-usuarios-sonarqube_logs:/opt/sonarqube/logs
-#      - prova-usuarios-sonarqube_temp:/opt/sonarqube/temp
 
 #  app:
 #    container_name: app_usuarios

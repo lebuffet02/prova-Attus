@@ -1,9 +1,6 @@
 package api.usuarios.exception.handler;
 
-import api.usuarios.exception.AuthException;
-import api.usuarios.exception.EmailException;
-import api.usuarios.exception.ErrorDetails;
-import api.usuarios.exception.RefreshException;
+import api.usuarios.exception.*;
 import api.usuarios.utils.IpUtils;
 import api.usuarios.utils.RandomUtils;
 import api.usuarios.utils.TimeUtils;
@@ -33,5 +30,17 @@ public class ErrorHandlerAuth extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> errorValidatingAwsEmailSes(EmailException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "externalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
+    }
+
+    @ExceptionHandler(InvalidEmailException.class)
+    public ResponseEntity<ErrorDetails> errorInvalidEmailProvided(InvalidEmailException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorDetails> errorUserIdNotFound(UserNotFoundException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
     }
 }

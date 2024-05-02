@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Table(name = "ENDERECOS")
 @Data
 @NoArgsConstructor
-public class EnderecoEntity implements Serializable {
+public class AddressEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
