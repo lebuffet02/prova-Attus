@@ -43,4 +43,28 @@ public class ErrorHandlerAuth extends ResponseEntityExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
     }
+
+    @ExceptionHandler(UserCanotBeRegisteredException.class)
+    public ResponseEntity<ErrorDetails> errorUserCanotBeRegistered(UserCanotBeRegisteredException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
+    }
+
+    @ExceptionHandler(UnauthorizedExcepion.class)
+    public ResponseEntity<ErrorDetails> errorUserUnauthorized(UnauthorizedExcepion ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(401));
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorDetails> errorUserForbidden(ForbiddenException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(403));
+    }
+
+    @ExceptionHandler(ServerException.class)
+    public ResponseEntity<ErrorDetails> errorUserServerError(ServerException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
+    }
 }

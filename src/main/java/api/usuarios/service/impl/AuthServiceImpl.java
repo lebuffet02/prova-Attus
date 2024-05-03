@@ -1,8 +1,8 @@
 package api.usuarios.service.impl;
 
 import api.usuarios.client.KeycloakClient;
-import api.usuarios.domain.AuthKeycloak;
-import api.usuarios.domain.RefreshKeycloak;
+import api.usuarios.form.AuthKeycloak;
+import api.usuarios.form.RefreshKeycloak;
 import api.usuarios.dto.auth.AuthKeycloakDTO;
 import api.usuarios.exception.AuthException;
 import api.usuarios.exception.RefreshException;

@@ -1,8 +1,8 @@
 package api.usuarios.controller;
 
 import api.usuarios.client.KeycloakClient;
-import api.usuarios.domain.AuthKeycloak;
-import api.usuarios.domain.RefreshKeycloak;
+import api.usuarios.form.AuthKeycloak;
+import api.usuarios.form.RefreshKeycloak;
 import api.usuarios.service.impl.AuthServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

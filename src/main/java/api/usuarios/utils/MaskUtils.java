@@ -14,7 +14,7 @@ public class MaskUtils {
                 return matcher.replaceAll("$1.$2.$3-$4");
             }
         }
-        return tipoCpf;
+        return null;
     }
 
     public static String ofuscarCpf(String cpf) {

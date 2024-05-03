@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api") //mapear a porta no filterchain
+@RequestMapping("/api")
 public class D {
 
     @PreAuthorize("hasRole('ADMIN')")

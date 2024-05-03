@@ -1,6 +1,8 @@
 package api.usuarios.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,12 +10,14 @@ import java.io.Serializable;
 
 @Entity(name = "EnderecoEntity")
 @Table(name = "ENDERECOS")
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class AddressEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "estado")

@@ -1,6 +1,6 @@
 package api.usuarios.mapper;
 
-import api.usuarios.domain.AuthKeycloak;
+import api.usuarios.form.AuthKeycloak;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

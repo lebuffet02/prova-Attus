@@ -16,7 +16,6 @@ public class EmailController implements EmailDocumentation {
     @Autowired
     EmailServiceImpl serviceImpl;
 
-
     @Override
     @PreAuthorize("hasRole('USER')")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,6 +1,6 @@
 package api.usuarios.mapper;
 
-import api.usuarios.domain.AuthKeycloak;
+import api.usuarios.form.AuthKeycloak;
 import api.usuarios.dto.auth.AuthKeycloakDTO;
 import org.springframework.stereotype.Component;
 

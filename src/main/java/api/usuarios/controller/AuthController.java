@@ -2,8 +2,8 @@ package api.usuarios.controller;
 
 import api.usuarios.client.KeycloakClient;
 import api.usuarios.documentation.AuthDocumentation;
-import api.usuarios.domain.AuthKeycloak;
-import api.usuarios.domain.RefreshKeycloak;
+import api.usuarios.form.AuthKeycloak;
+import api.usuarios.form.RefreshKeycloak;
 import api.usuarios.dto.auth.AuthKeycloakDTO;
 import api.usuarios.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

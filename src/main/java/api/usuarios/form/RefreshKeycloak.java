@@ -1,4 +1,4 @@
-package api.usuarios.domain;
+package api.usuarios.form;
 
 import lombok.Builder;
 

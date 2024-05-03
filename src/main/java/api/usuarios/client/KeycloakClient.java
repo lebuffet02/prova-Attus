@@ -1,6 +1,6 @@
 package api.usuarios.client;
 
-import api.usuarios.domain.AuthKeycloak;
+import api.usuarios.form.AuthKeycloak;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

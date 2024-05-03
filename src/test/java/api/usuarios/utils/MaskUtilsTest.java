@@ -23,7 +23,7 @@ class MaskUtilsTest {
     @DisplayName("Não deve retornar o cpf mascarado ao inserir um cpf inválido.")
     @Test
     void testaMascaraCpfInvalida() {
-        Assertions.assertNotNull(MaskUtils.maskCpf(CPF_INCORRETO));
+        Assertions.assertNull(MaskUtils.maskCpf(CPF_INCORRETO));
     }
 
     @DisplayName("O cpf não deve ser mascarado corretamente.")
@@ -41,7 +41,7 @@ class MaskUtilsTest {
     @DisplayName("O cpf inválido mascarado deve retornar ele mesmo(vazio).")
     @Test
     void testaCpfMascaradoDeveSerVazio() {
-        Assertions.assertNotNull(MaskUtils.maskCpf(""));
+        Assertions.assertNull(MaskUtils.maskCpf(""));
     }
 
     @DisplayName("Não deve ser nulo ao chamar o método ofuscarCpf.")

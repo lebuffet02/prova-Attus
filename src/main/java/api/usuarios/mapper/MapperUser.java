@@ -19,13 +19,33 @@ public class MapperUser {
                 .build();
     }
 
+    public UserEntity dtoToEntity(UserDTO userDTO) {
+        return UserEntity.builder()
+                .nomeCompleto(userDTO.nomeCompleto())
+                .email(userDTO.email())
+                .cpf(userDTO.cpf())
+                .dataNascimento(userDTO.dataNascimento())
+                .enderecos(addressDTOToEntity(userDTO.addressDTO()))
+                .build();
+    }
+
     private AddressDTO addressEntityToDTO(AddressEntity addressEntity) {
         return AddressDTO.builder()
-                .estado(addressEntity.getEstado())
+                .estado(addressEntity.getEstado().toUpperCase())
                 .cidade(addressEntity.getCidade())
                 .logradouro(addressEntity.getLogradouro())
                 .cep(addressEntity.getCep())
                 .numero(addressEntity.getNumero())
+                .build();
+    }
+
+    private AddressEntity addressDTOToEntity(AddressDTO addressDTO) {
+        return AddressEntity.builder()
+                .estado(addressDTO.estado().toUpperCase())
+                .cidade(addressDTO.cidade())
+                .logradouro(addressDTO.logradouro())
+                .cep(addressDTO.cep())
+                .numero(addressDTO.numero())
                 .build();
     }
 }

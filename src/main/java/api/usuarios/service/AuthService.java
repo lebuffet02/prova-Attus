@@ -1,8 +1,8 @@
 package api.usuarios.service;
 
 
-import api.usuarios.domain.AuthKeycloak;
-import api.usuarios.domain.RefreshKeycloak;
+import api.usuarios.form.AuthKeycloak;
+import api.usuarios.form.RefreshKeycloak;
 import api.usuarios.dto.auth.AuthKeycloakDTO;
 
 public interface AuthService {
