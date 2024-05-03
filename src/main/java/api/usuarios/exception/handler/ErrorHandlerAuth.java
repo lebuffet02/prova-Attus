@@ -6,6 +6,7 @@ import api.usuarios.utils.RandomUtils;
 import api.usuarios.utils.TimeUtils;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -30,12 +31,6 @@ public class ErrorHandlerAuth extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> errorValidatingAwsEmailSes(EmailException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "externalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
-    }
-
-    @ExceptionHandler(InvalidEmailException.class)
-    public ResponseEntity<ErrorDetails> errorInvalidEmailProvided(InvalidEmailException ex) {
-        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
-        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
     }
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -64,6 +59,12 @@ public class ErrorHandlerAuth extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ServerException.class)
     public ResponseEntity<ErrorDetails> errorUserServerError(ServerException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
+    }
+
+    @ExceptionHandler(MailException.class)
+    public ResponseEntity<ErrorDetails> errorUserServerErrord(MailException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
     }

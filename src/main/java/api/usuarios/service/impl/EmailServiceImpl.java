@@ -3,7 +3,6 @@ package api.usuarios.service.impl;
 import api.usuarios.dto.EmailRequestDTO;
 import api.usuarios.entity.UserEntity;
 import api.usuarios.exception.EmailException;
-import api.usuarios.exception.InvalidEmailException;
 import api.usuarios.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,28 +28,25 @@ public class EmailServiceImpl {
             if(usuarioEntity.isEmpty()) {
                 throw new EmailException("Email not found for: ".concat(emailDTO.to()));
             }
-            log.info("toEmail: {} subJect: {} emailMessage: {}", emailDTO.to(), emailDTO.subject(), emailDTO.body());
+            log.info("toEmail: {} subJect: {} emailMessage: {}", emailDTO.to(), emailDTO.subject(), emailDTO.message());
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom(getEmailSentBy(emailDTO));
-            mailMessage.setTo(emailDTO.to().toLowerCase());
+            mailMessage.setTo(emailDTO.to());
             mailMessage.setSubject(emailDTO.subject());
-            mailMessage.setText(emailDTO.body());
+            mailMessage.setText(emailDTO.message());
             mailSender.send(mailMessage);
         }
-        catch (EmailException e) {
+        catch (Exception e) {
             log.error("Exception: ".concat(e.getMessage()));
             throw new EmailException(e.getMessage());
         }
-        catch (InvalidEmailException e) {
-            throw new InvalidEmailException(e.getMessage());
-        }
     }
 
-    private String getEmailSentBy(EmailRequestDTO emailSentBy) {
-        if(!emailSentBy.isEmailValid(emailSentBy.sentBy())) {
-            throw new InvalidEmailException();
+    private String getEmailSentBy(EmailRequestDTO emailFrom) {
+        if(!emailFrom.isEmailValid(emailFrom.from())) {
+            throw new EmailException();
         }
-        return emailSentBy.sentBy();
+        return emailFrom.from();
     }
 
     private static String removeSpace(String email) {

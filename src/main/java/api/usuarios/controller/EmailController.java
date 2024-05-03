@@ -21,6 +21,6 @@ public class EmailController implements EmailDocumentation {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> sendEmail(@RequestBody EmailRequestDTO emailDTO) {
         serviceImpl.sendEmail(emailDTO);
-        return ResponseEntity.ok("Email sent successfully!");
+        return ResponseEntity.status(201).build();
     }
 }

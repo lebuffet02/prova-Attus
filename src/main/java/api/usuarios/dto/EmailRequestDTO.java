@@ -1,16 +1,15 @@
 package api.usuarios.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import java.util.regex.Matcher;
 
 public record EmailRequestDTO(
-        @NotBlank
-        @Pattern(regexp = EMAIL_PATTERN) String sentBy,
-        @NotBlank
-        @Pattern(regexp = EMAIL_PATTERN) String to,
-        @NotBlank String subject,
-        @NotBlank String body) {
+        @Pattern(regexp = EMAIL_PATTERN)
+        String from,
+        @Pattern(regexp = EMAIL_PATTERN)
+        String to,
+        String message,
+        String subject) {
 
 
     private static final String EMAIL_PATTERN =

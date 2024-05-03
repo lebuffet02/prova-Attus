@@ -3,7 +3,6 @@ package api.usuarios.service.impl;
 import api.usuarios.dto.EmailRequestDTO;
 import api.usuarios.entity.UserEntity;
 import api.usuarios.exception.EmailException;
-import api.usuarios.exception.InvalidEmailException;
 import api.usuarios.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -37,32 +36,25 @@ class EmailServiceImplTest {
         verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
     }
 
-    @DisplayName("Lança exception do tipo EmailException.")
+    @DisplayName("Lança exceção do tipo EmailException.")
     @Test
     void lancaExceptionDoTipoEmailException() {
         when(repository.findByEmail(anyString())).thenThrow(EmailException.class);
         Assertions.assertThrows(Exception.class, () -> serviceImpl.sendEmail(getEmail()));
     }
 
-    @DisplayName("Lança exception do tipo InvalidEmailException.")
+    @DisplayName("Lança exceção com email vazio.")
     @Test
-    void lancaExceptionDoTipoInvalidEmailException() {
-        when(repository.findByEmail(anyString())).thenThrow(InvalidEmailException.class);
-        Assertions.assertThrows(Exception.class, () -> serviceImpl.sendEmail(getEmail()));
-    }
-
-    @DisplayName("Lança exception do tipo InvalidEmailException com email vazio.")
-    @Test
-    void lancaExceptionDoTipoInvalidEmailEdxceptioComEmailNaoValido() {
+    void lancaExceptionComEmailNaoVazio() {
         Assertions.assertThrows(EmailException.class, () -> serviceImpl.sendEmail(new EmailRequestDTO("", "","", "")));
     }
 
-    @DisplayName("Lança exception do tipo InvalidEmailException com email vazio.")
+    @DisplayName("Lança exceção com email não válido.")
     @Test
-    void lancaExceptionDoTipoInvalidEmailEdxceptioComEmailNaoValidod() {
+    void lancaExceptionComEmailNaoValido() {
         UserEntity userEntity = entity();
         when(repository.findByEmail(anyString())).thenReturn(Optional.of(userEntity));
-        Assertions.assertThrows(InvalidEmailException.class, () -> serviceImpl.sendEmail(new EmailRequestDTO("le bu@gmail.com",
+        Assertions.assertThrows(Exception.class, () -> serviceImpl.sendEmail(new EmailRequestDTO("le bu@gmail.com",
                 "tes@gmail.com","a", "a")));
     }
 

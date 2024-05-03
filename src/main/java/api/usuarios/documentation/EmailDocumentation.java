@@ -17,7 +17,7 @@ public interface EmailDocumentation {
     @Operation(operationId = "email", description = "Send Email",
             requestBody = @RequestBody(required = true),
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Email was sent",
+                    @ApiResponse(responseCode = "201", description = "Email was sent",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = EmailRequestDTO.class))),
                     @ApiResponse(responseCode = "400", description = "Bad Request",
