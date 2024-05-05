@@ -6,7 +6,6 @@ import api.usuarios.utils.RandomUtils;
 import api.usuarios.utils.TimeUtils;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -27,45 +26,27 @@ public class ErrorHandlerAuth extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
     }
 
-    @ExceptionHandler(EmailException.class)
-    public ResponseEntity<ErrorDetails> errorValidatingAwsEmailSes(EmailException ex) {
-        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "externalError", RandomUtils.generateCode(), IpUtils.getAddress());
-        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
-    }
-
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorDetails> errorUserIdNotFound(UserNotFoundException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
     }
 
-    @ExceptionHandler(UserCanotBeRegisteredException.class)
-    public ResponseEntity<ErrorDetails> errorUserCanotBeRegistered(UserCanotBeRegisteredException ex) {
+    @ExceptionHandler(UserCannotBeRegisteredException.class)
+    public ResponseEntity<ErrorDetails> errorUserCanotBeRegistered(UserCannotBeRegisteredException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
         return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
     }
 
-    @ExceptionHandler(UnauthorizedExcepion.class)
-    public ResponseEntity<ErrorDetails> errorUserUnauthorized(UnauthorizedExcepion ex) {
+    @ExceptionHandler(UsersCannotBeDeletedException.class)
+    public ResponseEntity<ErrorDetails> errorDeleteAll(UsersCannotBeDeletedException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
-        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(401));
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
     }
 
-    @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<ErrorDetails> errorUserForbidden(ForbiddenException ex) {
+    @ExceptionHandler(SomeException.class)
+    public ResponseEntity<ErrorDetails> errorUserServer(SomeException ex) {
         ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
-        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(403));
-    }
-
-    @ExceptionHandler(ServerException.class)
-    public ResponseEntity<ErrorDetails> errorUserServerError(ServerException ex) {
-        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
-        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
-    }
-
-    @ExceptionHandler(MailException.class)
-    public ResponseEntity<ErrorDetails> errorUserServerErrord(MailException ex) {
-        ErrorDetails errorDetails = new ErrorDetails(TimeUtils.getZoneTimeWithClock(), ex.getMessage(), "internalError", RandomUtils.generateCode(), IpUtils.getAddress());
-        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(500));
+        return new ResponseEntity<>(errorDetails, HttpStatusCode.valueOf(400));
     }
 }

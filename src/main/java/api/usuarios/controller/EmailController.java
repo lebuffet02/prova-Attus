@@ -10,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/email")
+@RequestMapping(value ="/api/email", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmailController implements EmailDocumentation {
 
     @Autowired
@@ -18,7 +18,7 @@ public class EmailController implements EmailDocumentation {
 
     @Override
     @PreAuthorize("hasRole('USER')")
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<?> sendEmail(@RequestBody EmailRequestDTO emailDTO) {
         serviceImpl.sendEmail(emailDTO);
         return ResponseEntity.status(201).build();

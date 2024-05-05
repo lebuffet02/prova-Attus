@@ -18,11 +18,13 @@ public class UserController implements UserDocumentation {
     @Autowired
     UserServiceImpl serviceImpl;
 
+
     @PreAuthorize("hasRole('USER')")
     @PostMapping
     public ResponseEntity<Optional<UserDTO>> saveUser(@RequestBody UserDTO userDTO)  {
         return ResponseEntity.ok(serviceImpl.saveUserServiceImpl(userDTO));
     }
+
 
     @PreAuthorize("hasRole('USER')")
     @PutMapping("/{id}")

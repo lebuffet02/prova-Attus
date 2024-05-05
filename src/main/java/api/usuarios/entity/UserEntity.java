@@ -20,24 +20,23 @@ import java.time.LocalDate;
 public class UserEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nomeCompleto")
     @NotBlank(message = "O nome completo não pode estar vazio")
     private String nomeCompleto;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
     @Column(name = "dataNascimento")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate dataNascimento;
+    private String dataNascimento;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_Id", referencedColumnName = "id")
     private AddressEntity enderecos;
 }

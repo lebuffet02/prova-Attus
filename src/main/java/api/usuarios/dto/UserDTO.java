@@ -1,25 +1,17 @@
 package api.usuarios.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import api.usuarios.exception.UserCannotBeRegisteredException;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
-import org.springframework.format.annotation.DateTimeFormat;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 
 @Builder
 public record UserDTO(
-        @NotBlank
         String nomeCompleto,
-        @NotBlank
         @Pattern(regexp = EMAIL_PATTERN)
         String email,
-        @NotBlank
         String cpf,
-        @NotBlank
-        @DateTimeFormat(pattern = "dd-MM-yyyy")
-        LocalDate dataNascimento,
-        @NotBlank
+        String dataNascimento,
         AddressDTO addressDTO) {
 
     private static final String EMAIL_PATTERN =
@@ -30,7 +22,14 @@ public record UserDTO(
     private static final java.util.regex.Pattern PATTERN = java.util.regex.Pattern.compile(EMAIL_PATTERN);
 
     public boolean isEmailValid(final String email) {
-        Matcher matcher = PATTERN.matcher(email);
-        return matcher.matches();
+        try {
+            Matcher matcher = PATTERN.matcher(email);
+            if(matcher.matches()) {
+                return true;
+            }
+            throw new UserCannotBeRegisteredException();
+        } catch (RuntimeException ex) {
+            throw new UserCannotBeRegisteredException(String.format("%s", "Email is invalid."));
+        }
     }
 }

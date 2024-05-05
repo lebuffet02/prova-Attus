@@ -50,9 +50,6 @@ public class EmailServiceImpl {
     }
 
     private static String removeSpace(String email) {
-        if (!email.isEmpty()) {
-            return email.replaceAll("\\D", "");
-        }
-        return email;
+        return !email.isEmpty() ? email.replaceAll("\\D", "") : email;
     }
 }

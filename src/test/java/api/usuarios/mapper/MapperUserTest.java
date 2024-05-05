@@ -11,8 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
-import java.util.Date;
 
 @ExtendWith(MockitoExtension.class)
 class MapperUserTest {
@@ -32,9 +30,24 @@ class MapperUserTest {
         Assertions.assertNotNull(mapper.dtoToEntity(userDTO()));
     }
 
+    @DisplayName("Deve lançar exceção ao transformar o DTO UserDTO no UserEntity.")
+    @Test
+    void testaFormatacaoCpf() {
+        Assertions.assertThrows(Exception.class, () -> mapper.dtoToEntity( new UserDTO("lucas", "teste@gmail.com",
+                "000000000001","12/02/2002", null)));
+    }
+
+    @DisplayName("Deve lançar exceção ao transformar o DTO UserDTO no UserEntity.")
+    @Test
+    void testaFormatacaoCep() {
+        Assertions.assertThrows(Exception.class, () -> mapper.dtoToEntity( new UserDTO("lucas", "teste@gmail.com",
+                "00000000000","12/02/2002", new AddressDTO("rs", "poa", "rua"
+        , "911401411", "1"))));
+    }
+
     private UserDTO userDTO() {
         return new UserDTO("lucas", "teste@gmail.com", "00000000000",
-                LocalDate.now(), new AddressDTO("rs", "porto alegre", "alfredo",
+                "12/02/2002", new AddressDTO("rs", "porto alegre", "alfredo",
                 "00000000", "1"));
     }
 
@@ -45,7 +58,7 @@ class MapperUserTest {
         user.setNomeCompleto("Lucas Buffet");
         user.setEmail("teste@gmail.com");
         user.setCpf("11");
-        user.setDataNascimento(LocalDate.now());
+        user.setDataNascimento("");
         user.setEnderecos(address);
         return user;
     }

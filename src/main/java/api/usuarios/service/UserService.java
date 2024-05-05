@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface UserService {
 
-    Optional<UserDTO> saveUserServiceImpl(UserDTO userDTO);
-
     Optional<UserDTO> updateUserServiceImpl(Long id, UserDTO userDTO);
 
     List<UserDTO> getAllUsersServiceImpl();

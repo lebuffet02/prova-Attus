@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import java.time.LocalDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -23,6 +22,7 @@ class UserControllerTest {
     UserController controller;
 
     private static final Long ID = 1L;
+
 
     @DisplayName("Testa chamada da service saveUserServiceImpl")
     @Test
@@ -69,7 +69,7 @@ class UserControllerTest {
 
     private UserDTO userDTO() {
         return new UserDTO("lucas", "teste@gmail.com", "00000000000",
-                LocalDate.now(), new AddressDTO("rs", "porto alegre", "alfredo",
+                "12/02/2002", new AddressDTO("rs", "porto alegre", "alfredo",
                 "00000000", "1"));
     }
 }

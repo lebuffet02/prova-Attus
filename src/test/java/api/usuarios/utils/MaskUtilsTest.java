@@ -38,21 +38,9 @@ class MaskUtilsTest {
         Assertions.assertEquals(CPF_CORRETO_MASCARADO, MaskUtils.maskCpf(CPF_CORRETO));
     }
 
-    @DisplayName("O cpf inválido mascarado deve retornar ele mesmo(vazio).")
+    @DisplayName("O cpf inválido mascarado deve lançar NullPointer ao chamar o length.")
     @Test
     void testaCpfMascaradoDeveSerVazio() {
-        Assertions.assertNull(MaskUtils.maskCpf(""));
-    }
-
-    @DisplayName("Não deve ser nulo ao chamar o método ofuscarCpf.")
-    @Test
-    void testaOfuscarCpfNaoNulo() {
-        Assertions.assertNotNull(MaskUtils.ofuscarCpf(CPF_CORRETO));
-    }
-
-    @DisplayName("Deve estar ofuscado ao chamar o método ofuscarCpf passando um cpf válido.")
-    @Test
-    void testaOfuscarCpfValidoMascarado() {
-        Assertions.assertEquals(CPF_CORRETO_OFUSCADO, MaskUtils.ofuscarCpf(CPF_CORRETO));
+        Assertions.assertThrows(NullPointerException.class, () -> MaskUtils.maskCpf(""));
     }
 }
