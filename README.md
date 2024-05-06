@@ -21,6 +21,9 @@ dentre elas: Usuario e Endereco. Dessa forma, além dos atributos presentes em c
 das entidades, existe uma associação "muitos-para-um (N:1)" na entidade Usuario 
 em relação a entidade Endereco.
 
+### Link do vídeo sobre a explicação da API
+
+https://www.youtube.com/watch?v=_JZIwMFdzkg
   
 ## Como Executar a API
 
