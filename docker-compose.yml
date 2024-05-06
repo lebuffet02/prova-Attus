@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 networks:
   prova-usuarios:
@@ -23,21 +23,20 @@ services:
       - prova-usuarios-keycloak-data:/opt/jboss/keycloak/standalone/data
       - prova-usuarios-keycloak_logs:/opt/jboss/keycloak/standalone/log
 
-  app:
-    container_name: app-prova-usuarios
-    image: app-prova-usuarios
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/provaAttu
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=admin
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    ports:
-      - 8081:8081
+#  app:
+#    container_name: app-prova-usuarios
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - db
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/provaAttus
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=admin
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#    ports:
+#      - 8081:8081
 
   db:
     image: postgres
@@ -46,7 +45,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=provaAttu
+      - POSTGRES_DB=provaAttus
     ports:
       - 5432:5432
     volumes:

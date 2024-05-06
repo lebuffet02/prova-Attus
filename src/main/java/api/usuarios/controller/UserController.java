@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api/users", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/api/user", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class UserController implements UserDocumentation {
 
     @Autowired
