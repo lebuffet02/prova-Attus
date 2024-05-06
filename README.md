@@ -29,7 +29,7 @@ https://www.youtube.com/watch?v=_JZIwMFdzkg
 
 - Clonar repositório git:
 ```
-- git clone https://github.com/lebuffet02/prova-usuarios.git
+- git clone https://github.com/lebuffet02/prova-Attus.git
 ```
 - Executar o Keycloak:
 ```
