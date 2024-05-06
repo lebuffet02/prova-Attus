@@ -11,6 +11,7 @@
 - Docker Compose
 - Envio de Email
 - Junit5
+- Swagger
 
 ## Modelagem Conceitual
 ![Modelagem](/images/modeloConceitual.png)
@@ -40,6 +41,8 @@ Acessar o Swagger da API:
 ```
 - http://localhost:8081/swagger-ui/index.html#/
 ```
+
+![swagger](/images/swagger.png)
 
 ## Arquitetura
 

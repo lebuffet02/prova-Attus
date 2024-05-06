@@ -26,7 +26,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                 email = "lebuffet02@gmail.com"
         ),
         license = @License(
-                name = "Apache 2.0")), externalDocs = @ExternalDocumentation(url = "https://github.com/lebuffet02/prova-usuarios"),
+                name = "Apache 2.0")), externalDocs = @ExternalDocumentation(url = "https://github.com/lebuffet02/prova-Attus"),
         servers = @Server(url = "${server.port}", description = "porta alterada"),
         security = {
                 @SecurityRequirement(

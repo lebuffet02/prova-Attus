@@ -1,11 +1,11 @@
 version: '3.9'
 
 networks:
-  prova-usuarios:
+  prova-attus:
 
 volumes:
-  prova-usuarios-keycloak-data:
-  prova-usuarios-keycloak_logs:
+  prova-attus-keycloak-data:
+  prova-attus-keycloak_logs:
 
 services:
   keycloak:
@@ -20,11 +20,11 @@ services:
     command:
       - start-dev
     volumes:
-      - prova-usuarios-keycloak-data:/opt/jboss/keycloak/standalone/data
-      - prova-usuarios-keycloak_logs:/opt/jboss/keycloak/standalone/log
+      - prova-attus-keycloak-data:/opt/jboss/keycloak/standalone/data
+      - prova-attus-keycloak_logs:/opt/jboss/keycloak/standalone/log
 
 #  app:
-#    container_name: app-prova-usuarios
+#    container_name: app-prova-attus
 #    build:
 #      context: .
 #      dockerfile: Dockerfile
